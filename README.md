@@ -1,4 +1,7 @@
 # Real-Time Stock Market Data Pipeline
+## Data Pipeline Architecture
+
+![Pipeline Architecture](./diagrams/architecture.png)
 
 ## Overview
 
@@ -10,6 +13,18 @@ This project is built as a learning exercise in **data engineering architecture*
 
 ---
 
+
+## Learning Objectives
+
+This project demonstrates practical experience with:
+
+- modular Python pipeline design
+- API data ingestion
+- containerised data infrastructure
+- distributed data processing architecture
+- streaming data pipelines
+
+---
 ## Architecture
 
 The pipeline is designed to support a streaming data architecture using the following components:
@@ -71,6 +86,13 @@ Pipeline entry point that:
 The pipeline uses Python’s logging module to track pipeline activity.
 
 Example output:
+2026-03-17 02:09:33 - INFO - TSLA successfully loaded
+2026-03-17 02:09:34 - INFO - MSFT successfully loaded
+2026-03-17 02:09:34 - INFO - GOOGL successfully loaded
+2026-03-17 02:09:34 - INFO - 200 records extracted
+2026-03-17 02:09:34 - INFO - TSLA data successfully processed
+2026-03-17 02:09:34 - INFO - MSFT data successfully processed
+2026-03-17 02:09:34 - INFO - GOOGL data successfully processed
 
 
 
@@ -118,3 +140,4 @@ docker compose down
 Create a `.env` file in the project root.
 
 Example:
+API_KEY= the key you got from your API website
