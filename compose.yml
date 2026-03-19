@@ -63,7 +63,7 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_HOURS: 168
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      CLUSTER_ID: "jbzXiYiPQ8a2ejawHk4Q3w"
+      CLUSTER_ID: "xRvdiYI7RbS9bE0Hw1l8Zw"
     volumes:
       - kafka_data:/var/lib/kafka/data
     networks:
