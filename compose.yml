@@ -41,6 +41,22 @@ services:
     networks:
       - stock_data
 
+  consumer:
+    build:
+      context: ./consumer
+      dockerfile: Dockerfile
+    image: stream_consumer
+    container_name: consumer
+    depends_on:
+      - spark-master
+      - kafka
+    restart: unless-stopped
+    volumes:
+      - ivy_cache:/opt/spark/work-dir/.ivy2
+      - ./consumer:/opt/spark/work-dir/apps
+    networks:
+      - stock_data
+
   kafka:
     image: confluentinc/cp-kafka:7.4.10
     container_name: kafka
@@ -70,8 +86,8 @@ services:
       - stock_data
 
   kafka-ui:
-    container_name: kafka-ui
     image: provectuslabs/kafka-ui:v0.7.2
+    container_name: kafka-ui
     ports:
       - "8085:8080"
     depends_on:
