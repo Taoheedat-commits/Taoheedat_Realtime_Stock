@@ -13,6 +13,27 @@ This project is built as a learning exercise in **data engineering architecture*
 
 ---
 
+## Project Structure
+producer/
+│
+├── config.py           # API config, env loading, logging
+├── extract.py          # API calls + JSON extraction
+├── main.py             # Pipeline entry point
+├── producer_setup.py   # Kafka producer setup
+
+consumer/
+│
+├── consumer.py         # Spark streaming job
+
+diagrams/
+│
+├── architecture.png    # Pipeline diagram
+
+docker-compose.yml      # Full infrastructure stack
+requirements.txt
+README.md
+
+---
 
 ## Learning Objectives
 
@@ -68,16 +89,60 @@ Pipeline entry point that:
 
 ---
 
-## Technologies Used
+##  How It Works (End-to-End Flow)
 
-- Python
-- Docker
-- Docker Compose
-- Apache Kafka
-- Apache Spark
-- PostgreSQL
-- pgAdmin
-- Alpha Vantage API
+### 1. Data Ingestion (Producer)
+
+The pipeline starts in `producer/main.py`.
+
+- Connects to Alpha Vantage API
+- Extracts intraday stock data for:
+  - TSLA
+  - MSFT
+  - GOOGL
+- Transforms API response into structured records
+- Sends records to Kafka topic: `stock_analysis`
+
+This is where the “stream” begins even though the API is batch, I simulate streaming using delays.
+
+---
+
+### 2. Kafka (Streaming Layer)
+
+Kafka acts as the **message broker**:
+
+- Receives stock data from producer
+- Buffers and streams data to consumers
+- Enables decoupling between ingestion and processing
+
+---
+
+### 3. Spark Consumer (Processing Layer)
+
+Inside the containerized Spark job:
+
+- Reads streaming data from Kafka
+- Parses JSON into structured schema
+- Applies light transformations
+- Converts timestamps properly
+- Writes data in micro-batches
+
+This uses **Spark Structured Streaming**, not batch Spark.
+
+---
+
+### 4. Data Storage (PostgreSQL)
+
+- Processed data is written into a `stocks` table
+- Uses JDBC sink inside Spark
+- Supports continuous streaming inserts
+
+---
+
+### 5. Monitoring (pgAdmin + Kafka UI)
+
+- **Kafka UI** → inspect messages and topics  
+- **pgAdmin** → query stored data  
 
 ---
 
@@ -94,36 +159,27 @@ Example output:
 2026-03-17 02:09:34 - INFO - MSFT data successfully processed
 2026-03-17 02:09:34 - INFO - GOOGL data successfully processed
 
+---
 
+## Installations and Application Setup
 
+This project required setting up both local Python dependencies and containerised services.
 
 ---
 
-## Running the Pipeline
+### 1. Local Python Setup
 
-### 1. Activate virtual environment
+I created a virtual environment and installed the Python packages needed for the producer.
+
+### 2. Create virtual environment
+
+python -m venv venv
+
+### 3. Activate virtual environment
 venv\scripts\activate
 
-
-### 2. Run the producer
+### 4. Run the producer
 python producer/main.py
-
-
-
----
-
-## Running the Infrastructure Stack
-
-The project includes a Docker Compose configuration that launches the full data infrastructure.
-
-Services included:
-
-- Spark Master
-- Spark Worker
-- Kafka Broker
-- Kafka UI
-- PostgreSQL
-- pgAdmin
 
 Start the infrastructure:
 docker compose -d
