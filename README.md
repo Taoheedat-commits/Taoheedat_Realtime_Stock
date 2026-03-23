@@ -13,28 +13,6 @@ This project is built as a learning exercise in **data engineering architecture*
 
 ---
 
-## Project Structure
-producer/
-│
-├── config.py           # API config, env loading, logging
-├── extract.py          # API calls + JSON extraction
-├── main.py             # Pipeline entry point
-├── producer_setup.py   # Kafka producer setup
-
-consumer/
-│
-├── consumer.py         # Spark streaming job
-
-diagrams/
-│
-├── architecture.png    # Pipeline diagram
-
-docker-compose.yml      # Full infrastructure stack
-requirements.txt
-README.md
-
----
-
 ## Learning Objectives
 
 This project demonstrates practical experience with:
