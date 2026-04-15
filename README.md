@@ -23,7 +23,6 @@
 - [🔍 API Reference](#-api-reference)
 - [📊 Monitoring & Visualization](#-monitoring--visualization)
 - [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
 - [🙏 Acknowledgments](#-acknowledgments)
 
 ## 🎯 Overview
@@ -355,10 +354,6 @@ Contributions are welcome! Please follow these steps:
 - Add tests for new features
 - Update documentation as needed
 - Ensure Docker compatibility
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
