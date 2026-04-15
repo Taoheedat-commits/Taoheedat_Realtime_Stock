@@ -1,4 +1,5 @@
 # 📈 Real-Time Stock Market Data Pipeline
+![Pipeline Architecture](./diagrams/architecture.png)
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
@@ -71,7 +72,7 @@ The pipeline extracts intraday stock data from the Alpha Vantage API, streams it
 - Real-time pipeline health monitoring
 
 ## 🏗️ Architecture
-(./diagrams/architecture.png)
+
 ```mermaid
 graph TB
     A[Alpha Vantage API] --> B[Python Producer]
