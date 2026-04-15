@@ -71,7 +71,7 @@ The pipeline extracts intraday stock data from the Alpha Vantage API, streams it
 - Real-time pipeline health monitoring
 
 ## 🏗️ Architecture
-
+(./diagrams/architecture.png)
 ```mermaid
 graph TB
     A[Alpha Vantage API] --> B[Python Producer]
